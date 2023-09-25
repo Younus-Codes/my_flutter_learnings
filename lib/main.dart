@@ -17,7 +17,16 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
 
   StreamController<String> _streamController = StreamController<String>();
+
+  late Stream<String> _stream;
+
   TextEditingController _textEditingController = TextEditingController();
+
+  @override
+  void initState() {
+    _stream = _streamController.stream.asBroadcastStream();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +43,18 @@ class _MyAppState extends State<MyApp> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 StreamBuilder<String>(
-                    stream: _streamController.stream,
+                    stream: _stream,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return Text(snapshot.data!,
+                            style: Theme.of(context).textTheme.headline4);
+                      } else {
+                        return Text('No data',
+                            style: Theme.of(context).textTheme.headline4);
+                      }
+                    }),
+                StreamBuilder<String>(
+                    stream: _stream,
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         return Text(snapshot.data!,
