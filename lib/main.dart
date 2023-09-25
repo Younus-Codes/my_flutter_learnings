@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:my_learnings/Screen/DioRequest.dart';
+import 'package:my_learnings/Screen/Movies_Screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -38,50 +40,53 @@ class _MyAppState extends State<MyApp> {
           useMaterial3: true,
         ),
         home: Scaffold(
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                StreamBuilder<String>(
-                    stream: _stream,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return Text(snapshot.data!,
-                            style: Theme.of(context).textTheme.headline4);
-                      } else {
-                        return Text('No data',
-                            style: Theme.of(context).textTheme.headline4);
-                      }
-                    }),
-                StreamBuilder<String>(
-                    stream: _stream,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return Text(snapshot.data!,
-                            style: Theme.of(context).textTheme.headline4);
-                      } else {
-                        return Text('No data',
-                            style: Theme.of(context).textTheme.headline4);
-                      }
-                    }),
-                SizedBox(height: 20),
-                TextField(
-                  controller: _textEditingController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Enter your name',
-                  ),
-                ),
-                SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    _streamController.add(_textEditingController.text);
-                  },
-                  child: Text('Submit'),
-                ),
-              ],
-            ),
+          body: Container(
+            child: MovieScreen(),
           ),
+          //DioRequest(),
         ));
   }
 }
+
+// child: Column(
+// mainAxisAlignment: MainAxisAlignment.center,
+// children: [
+// StreamBuilder<String>(
+// stream: _stream,
+// builder: (context, snapshot) {
+// if (snapshot.hasData) {
+// return Text(snapshot.data!,
+// style: Theme.of(context).textTheme.headline4);
+// } else {
+// return Text('No data',
+// style: Theme.of(context).textTheme.headline4);
+// }
+// }),
+// StreamBuilder<String>(
+// stream: _stream,
+// builder: (context, snapshot) {
+// if (snapshot.hasData) {
+// return Text(snapshot.data!,
+// style: Theme.of(context).textTheme.headline4);
+// } else {
+// return Text('No data',
+// style: Theme.of(context).textTheme.headline4);
+// }
+// }),
+// SizedBox(height: 20),
+// TextField(
+// controller: _textEditingController,
+// decoration: InputDecoration(
+// border: OutlineInputBorder(),
+// labelText: 'Enter your name',
+// ),
+// ),
+// SizedBox(height: 20),
+// ElevatedButton(
+// onPressed: () {
+// _streamController.add(_textEditingController.text);
+// },
+// child: Text('Submit'),
+// ),
+// ],
+// ),
